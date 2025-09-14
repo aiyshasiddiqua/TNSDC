@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portfolio | Your Name</title>
+  <style>
+    /* ======= CSS START ======= */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    body { background: #f4f6f9; color: #333; line-height: 1.6; }
+    header { background: #111; color: #fff; padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; }
+    .nav-links { list-style: none; display: flex; gap: 1.5rem; }
+    .nav-links a { color: #fff; text-decoration: none; transition: 0.3s; }
+    .nav-links a:hover { color: #00bcd4; }
+    .menu-btn { display: none; font-size: 1.5rem; background: none; border: none; color: white; }
+    .hero { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, #00bcd4, #3f51b5); color: #fff; }
+    .hero .highlight { color: yellow; }
+    .btn { margin-top: 1rem; padding: 10px 20px; background: #111; color: white; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+    .btn:hover { background: #00bcd4; }
+    .section { padding: 4rem 2rem; text-align: center; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .skill { background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .project-card { background: #fff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .project-card:hover { transform: scale(1.05); }
+    .contact-form { max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 1rem; }
+    .contact-form input, .contact-form textarea { padding: 0.8rem; border: 1px solid #ddd; border-radius: 6px; }
+    footer { background: #111; color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; background: #111; position: absolute; top: 60px; right: 10px; padding: 1rem; border-radius: 10px; }
+      .nav-links.active { display: flex; }
+      .menu-btn { display: block; }
+    }
+    /* ======= CSS END ======= */
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">MyPortfolio</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Hello, I'm <span class="highlight">AIYSHA</span></h1>
+    <p>A Computer Science Student passionate about <span id="typing"></span></p>
+    <a href="#projects" class="btn">View My Work</a>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>I am a B.Sc. Computer Science student who loves coding, problem-solving, and building interactive web applications. My goal is to grow into a professional developer and contribute to impactful projects.</p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">Python</div>
+      <div class="skill">C++</div>
+      <div class="skill">React</div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>A responsive portfolio showcasing my skills and projects.</p>
+      </div>
+      <div class="project-card">
+        <h3>To-Do App</h3>
+        <p>A JavaScript-based app to manage daily tasks efficiently.</p>
+      </div>
+      <div class="project-card">
+        <h3>Quiz Game</h3>
+        <p>A fun web-based quiz game built with HTML, CSS, and JS.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2>Contact Me</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message"></textarea>
+      <button type="submit" class="btn">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Your Name | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // ======= JavaScript START =======
+
+    // Typing effect
+    const textArray = ["Web Development", "Problem Solving", "Creative Coding", "Innovation"];
+    let typingIndex = 0;
+    let charIndex = 0;
+    const typingElement = document.getElementById("typing");
+
+    function type() {
+      if (charIndex < textArray[typingIndex].length) {
+        typingElement.textContent += textArray[typingIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 100);
+      } else {
+        setTimeout(erase, 1500);
+      }
+    }
+    function erase() {
+      if (charIndex > 0) {
+        typingElement.textContent = textArray[typingIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, 50);
+      } else {
+        typingIndex = (typingIndex + 1) % textArray.length;
+        setTimeout(type, 500);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", type);
+
+    // Mobile Menu
+    function toggleMenu() {
+      document.querySelector(".nav-links").classList.toggle("active");
+    }
+
+    // ======= JavaScript END =======
+  </script>
+</body>
+</html>
+
+
+
+
+
+
